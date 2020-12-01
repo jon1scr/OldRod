@@ -287,7 +287,7 @@ namespace OldRod.Pipeline.Stages.VMMethodDetection
                     if (instr.IsLdcI4())
                     {
                         // Push the ldc.i4 value if we reach one.
-                        stack.Push(instr.GetLdcI4Constant());
+                        
 for(int x = 0; x < instructions;x++)
 {
 if(instructions[x+4].OpCode == OpCodes.Ldtoken)
