@@ -35,14 +35,20 @@ namespace OldRod.Pipeline.Stages.VMMethodDetection
 
         private static readonly IList<string> Run1ExpectedTypes = new[]
         {
+"System.UInt32",
+"System.UInt32",
             "System.RuntimeTypeHandle",
             "System.UInt32",
+"System.UInt32",
             "System.Object[]"
         };
         
         private static readonly IList<string> Run2ExpectedTypes = new[]
         {
+"System.UInt32",
+"System.UInt32",
             "System.RuntimeTypeHandle",
+"System.UInt32",
             "System.UInt32",
             "System.Void*[]",
             "System.Void*",
@@ -75,10 +81,10 @@ namespace OldRod.Pipeline.Stages.VMMethodDetection
 
             if (context.Options.RenameSymbols)
             {
-                context.VMEntryInfo.VMEntryType.Namespace = "KoiVM.Runtime";
-                context.VMEntryInfo.VMEntryType.Name = "VMEntry";
-                context.VMEntryInfo.RunMethod1.Name = "Run";
-                context.VMEntryInfo.RunMethod2.Name = "Run";
+                context.VMEntryInfo.VMEntryType.Namespace = "What_a_great_VM";
+                context.VMEntryInfo.VMEntryType.Name = "DarksVM";
+                context.VMEntryInfo.RunMethod1.Name = "Load";
+                context.VMEntryInfo.RunMethod2.Name = "Load";
             }
         }
 
@@ -158,11 +164,11 @@ namespace OldRod.Pipeline.Stages.VMMethodDetection
             {
                 switch (method.Signature.ParameterTypes.Count)
                 {
-                    case 3:
+                    case 6:
                         if (HasParameterTypes(method, Run1ExpectedTypes))
                             info.RunMethod1 = method;
                         break;
-                    case 4:
+                    case 7:
                         if (HasParameterTypes(method, Run2ExpectedTypes))
                             info.RunMethod2 = method;
                         break;
@@ -282,6 +288,13 @@ namespace OldRod.Pipeline.Stages.VMMethodDetection
                     {
                         // Push the ldc.i4 value if we reach one.
                         stack.Push(instr.GetLdcI4Constant());
+for(int x = 0; x < instructions;x++)
+{
+if(instructions[x+4].OpCode == OpCodes.Ldtoken)
+{
+stack.Push(instruction[x+1].GetLdcI4Constant() / 5 / 63493);
+}
+}
                     }
                     else
                     {
