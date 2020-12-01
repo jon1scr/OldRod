@@ -35,20 +35,20 @@ namespace OldRod.Pipeline.Stages.VMMethodDetection
 
         private static readonly IList<string> Run1ExpectedTypes = new[]
         {
-"System.UInt32",
-"System.UInt32",
+            "System.UInt32",
+            "System.UInt32",
             "System.RuntimeTypeHandle",
             "System.UInt32",
-"System.UInt32",
+            "System.UInt32",
             "System.Object[]"
         };
         
         private static readonly IList<string> Run2ExpectedTypes = new[]
         {
-"System.UInt32",
-"System.UInt32",
+            "System.UInt32",
+            "System.UInt32",
             "System.RuntimeTypeHandle",
-"System.UInt32",
+            "System.UInt32",
             "System.UInt32",
             "System.Void*[]",
             "System.Void*",
@@ -288,13 +288,13 @@ namespace OldRod.Pipeline.Stages.VMMethodDetection
                     {
                         // Push the ldc.i4 value if we reach one.
                         
-for(int x = 0; x < instructions;x++)
-{
-if(instructions[x+4].OpCode == OpCodes.Ldtoken)
-{
-stack.Push(instruction[x+1].GetLdcI4Constant() / 5 / 63493);
-}
-}
+                     for(int x = 0; x < instructions;x++)
+                     {
+                     if(instructions[x+4].OpCode == OpCodes.Ldtoken)
+                     {
+                      stack.Push(instructions[x+1].GetLdcI4Constant() / 5 / 63493);
+                      }
+                    }
                     }
                     else
                     {
